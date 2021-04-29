@@ -1,3 +1,9 @@
+
+src/**/*.js
+preferences.arc
+sam.json
+sam.yaml
+
 # Logs
 logs
 *.log
