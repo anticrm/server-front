@@ -2,7 +2,8 @@
 front
 
 @http
-get /rpc
+post /rpc
+options /rpc
 
 # @aws
 # profile default

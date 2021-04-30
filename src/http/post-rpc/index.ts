@@ -13,7 +13,9 @@ function httpResponse(statusCode: number, resp: Response<any>): HttpResponse {
   return {
     statusCode,
     headers: {
-      'content-type': 'application/json; charset=utf8'
+      'Content-Type': 'application/json;charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
     },
     body: serialize(resp)
   }
@@ -25,11 +27,10 @@ export async function handler (req: HttpRequest, context: Context): Promise<Http
   context.callbackWaitsForEmptyEventLoop = false
 
   try {
-
-    const request = req.body
+    const request = JSON.parse(req.body)
     const method = (methods as { [key: string]: (db: Db, request: Request<any>) => Response<any> })[request.method]
     if (method === undefined) {
-      throw new PlatformError(new Status(Severity.ERROR, 0, 'unknown method'))
+      throw new PlatformError(new Status(Severity.ERROR, 0, 'unknown method: ' + request.method))
     }
 
     if (client === undefined) {
