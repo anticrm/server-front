@@ -4,7 +4,7 @@ import type { HttpRequest, HttpResponse } from '@architect/functions'
 import type { Context } from 'aws-lambda'
 
 import { Request, Response, serialize, fromStatus } from '@anticrm/rpc'
-import { methods } from '@anticrm/server-account'
+import { secureMethods as methods } from '@anticrm/server-account'
 import { Status, Severity, PlatformError } from '@anticrm/status'
 
 let client: MongoClient | undefined
